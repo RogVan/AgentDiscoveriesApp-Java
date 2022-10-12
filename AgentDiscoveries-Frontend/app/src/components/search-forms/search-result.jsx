@@ -31,9 +31,9 @@ export default class SearchResult extends React.Component {
     renderResultBody(result) {
         return Object.keys(result).map(key => {
             if (result[key] == null || result[key] == '')
-                {return null;}
+            {return null;}
             if (key == 'reportTitle')
-                {return null;}
+            {return null;}
             return <p key={key} id={key}>{`${key}: ${result[key]}`}</p>;
         });
     }

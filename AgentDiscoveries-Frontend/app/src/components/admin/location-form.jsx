@@ -58,7 +58,14 @@ export default class LocationForm extends React.Component {
                             <FormControl type='text' required
                                 placeholder='Enter time zone (e.g. "Europe/London")'
                                 value={this.state.timeZone}
-                                onChange={this.onTimeZoneChange}/>
+                                onChange={this.onTimeZoneChange}
+                                list="data"/>
+
+                            <datalist id="data">
+                                {Intl.supportedValuesOf('timeZone').map((item, index) =>
+                                    <option key={index} value={item} />
+                                )}
+                            </datalist>
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Region</ControlLabel>
@@ -84,6 +91,7 @@ export default class LocationForm extends React.Component {
                         <Button type='submit'>Submit</Button>
                     </Form>
                 </div>
+                
             </div>
         );
     }
