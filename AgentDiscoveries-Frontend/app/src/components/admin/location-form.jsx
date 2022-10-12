@@ -14,6 +14,7 @@ export default class LocationForm extends React.Component {
             regionId: '',
             latitude: '',
             longitude: '',
+            ReigonsArr: [],
             message: {}
         };
 
@@ -24,6 +25,7 @@ export default class LocationForm extends React.Component {
         this.onLatitudeChange = this.onLatitudeChange.bind(this);
         this.onLongitudeChange = this.onLongitudeChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.loadReigons = this.loadReigons.bind(this);
 
         // In edit mode, the ID of the location is passed in through props
         if (this.props.id) {
@@ -69,10 +71,14 @@ export default class LocationForm extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Region</ControlLabel>
-                            <FormControl type='number'
+                            <FormControl type='select'
                                 placeholder='Enter region ID (optional)'
                                 value={this.state.regionId}
-                                onChange={this.onRegionIdChange}/>
+                                onChange={this.onRegionIdChange}
+                                list=""/>
+                            
+                                
+                            
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Latitude</ControlLabel>
@@ -145,5 +151,20 @@ export default class LocationForm extends React.Component {
         apiGet('locations', id)
             .then(result => this.setState(result))
             .catch(error => this.setState({ message: { message: error.message, type: 'danger' } }));
+    }
+    loadReigons(event){
+
+        const url = '/Reigons';
+
+        try {
+            apiGet(url).then(resultarr => {
+                console.log(resultarr[0]);
+                this.setState({ ReigonsArr : resultarr});
+                console.log(this.setState.ReigonsArr[0]);
+            });
+
+        } catch (error) {
+            return this.setState({ message: { message: error.message, type: 'danger' } });
+        }
     }
 }
