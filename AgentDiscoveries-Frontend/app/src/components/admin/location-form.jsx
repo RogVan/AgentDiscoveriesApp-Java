@@ -25,7 +25,7 @@ export default class LocationForm extends React.Component {
         this.onLatitudeChange = this.onLatitudeChange.bind(this);
         this.onLongitudeChange = this.onLongitudeChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.loadReigons = this.loadReigons.bind(this);
+        this.loadRegions = this.loadRegions.bind(this);
 
         // In edit mode, the ID of the location is passed in through props
         if (this.props.id) {
@@ -33,20 +33,30 @@ export default class LocationForm extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.log('thumb');
+        this.loadRegions;
+    
+    }
+    
+
     render() {
         return (
+            
             <div className='col-md-8 col-md-offset-4'>
-                <Message message={this.state.message} />
-                <div className='col-md-12' onLoad={this.loadReigons}>
+                
+                <Message message={this.state.message}  />
+                <div className='col-md-12' >
                     <Form onSubmit={this.onSubmit}>
-                        <h3>{this.props.id ? 'Edit' : 'Create'} Location</h3>
+                        <h3 >{this.props.id ? 'Edit' : 'Create'} Location</h3>
 
-                        <FormGroup>
+                        <FormGroup  >
                             <ControlLabel>Site Name</ControlLabel>
                             <FormControl type='text' required
                                 placeholder='Enter site name'
                                 value={this.state.siteName}
-                                onChange={this.onSiteChange}/>
+                                onChange={this.onSiteChange}
+                            />
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Location Name</ControlLabel>
@@ -76,13 +86,14 @@ export default class LocationForm extends React.Component {
                                 value={this.state.regionId}
                                 onChange={this.onRegionIdChange}
                                 list="reigonList"
+                               
                             />
 
-                            {/* <datalist id="reigonList">
-                                {this.ReigonsArr.map((item, index) =>
-                                    <option key={index} value={item} />
-                                )}
-                            </datalist> */}
+                            <datalist id="reigonList" onMouseEnter={this.loadRegions}>
+                                <this.renderifTrue></this.renderifTrue>
+
+                               
+                            </datalist>
 
                                 
                             
@@ -107,6 +118,19 @@ export default class LocationForm extends React.Component {
                 
             </div>
         );
+    }
+
+    renderifTrue(){
+        this.loadRegions;
+        if(this.state.ReigonsArr){
+            return (
+                <div>  {this.state.ReigonsArr.map((item, index) =>
+                    <option key={index} value={item} />
+
+                )}
+                </div>);
+
+        }
     }
 
     onSiteChange(event) {
@@ -160,9 +184,11 @@ export default class LocationForm extends React.Component {
             .catch(error => this.setState({ message: { message: error.message, type: 'danger' } }));
     }
 
-    loadReigons(event){
+    loadRegions(event){
+        event.preventDefault();
+        console.log('test');
 
-        const url = '/Reigons';
+        const url = '/regions';
 
         try {
             apiGet(url).then(resultarr => {
