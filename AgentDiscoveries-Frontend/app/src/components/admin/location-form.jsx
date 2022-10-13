@@ -34,8 +34,7 @@ export default class LocationForm extends React.Component {
     }
 
     componentDidMount() {
-        console.log('thumb');
-        this.loadRegions;
+        this.loadRegions();
     
     }
     
@@ -81,7 +80,7 @@ export default class LocationForm extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Region</ControlLabel>
-                            <FormControl type='select'
+                            <FormControl type='number'
                                 placeholder='Enter region ID (optional)'
                                 value={this.state.regionId}
                                 onChange={this.onRegionIdChange}
@@ -89,11 +88,11 @@ export default class LocationForm extends React.Component {
                                
                             />
 
-                            <datalist id="reigonList" onLoad={this.loadRegions}>
-                                {/* {this.state.ReigonsArr.map((item, index) =>
-                                    <option key={index} value={item} />
+                            <datalist id="reigonList" > 
+                                {this.state.ReigonsArr.map((item, index) =>
+                                    <option key={index} value={item.regionId} >{item.name}</option>
 
-                                )} */}
+                                )}
                                
                             </datalist>
 
@@ -187,7 +186,7 @@ export default class LocationForm extends React.Component {
     }
 
     loadRegions(event){
-        event.preventDefault();
+        
         console.log('test');
 
         const url = '/regions';
@@ -196,7 +195,7 @@ export default class LocationForm extends React.Component {
             apiGet(url).then(resultarr => {
                 console.log(resultarr[0]);
                 this.setState({ ReigonsArr : resultarr});
-                console.log(this.setState.ReigonsArr[0]);
+                console.log(this.state.ReigonsArr[0].regionId);
             });
 
         } catch (error) {

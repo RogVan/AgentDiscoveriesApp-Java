@@ -17,7 +17,7 @@ export default class SearchResult extends React.Component {
 
                 <Panel key={index} id="collapsible-panel-example-2" defaultCollapse bsStyle="primary" >
                     <Panel.Heading><Panel.Title toggle>
-                        Result
+                        Result 
                     </Panel.Title></Panel.Heading>
                     <Panel.Collapse>
                         <Panel.Body>{this.renderResultBody(result)}</Panel.Body>
