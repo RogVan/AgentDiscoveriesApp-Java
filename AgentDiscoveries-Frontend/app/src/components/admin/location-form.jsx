@@ -37,7 +37,7 @@ export default class LocationForm extends React.Component {
         return (
             <div className='col-md-8 col-md-offset-4'>
                 <Message message={this.state.message} />
-                <div className='col-md-12'>
+                <div className='col-md-12' onLoad={this.loadReigons}>
                     <Form onSubmit={this.onSubmit}>
                         <h3>{this.props.id ? 'Edit' : 'Create'} Location</h3>
 
@@ -75,8 +75,15 @@ export default class LocationForm extends React.Component {
                                 placeholder='Enter region ID (optional)'
                                 value={this.state.regionId}
                                 onChange={this.onRegionIdChange}
-                                list=""/>
-                            
+                                list="reigonList"
+                            />
+
+                            {/* <datalist id="reigonList">
+                                {this.ReigonsArr.map((item, index) =>
+                                    <option key={index} value={item} />
+                                )}
+                            </datalist> */}
+
                                 
                             
                         </FormGroup>
@@ -152,6 +159,7 @@ export default class LocationForm extends React.Component {
             .then(result => this.setState(result))
             .catch(error => this.setState({ message: { message: error.message, type: 'danger' } }));
     }
+
     loadReigons(event){
 
         const url = '/Reigons';
