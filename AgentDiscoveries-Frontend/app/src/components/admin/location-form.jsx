@@ -89,9 +89,11 @@ export default class LocationForm extends React.Component {
                                
                             />
 
-                            <datalist id="reigonList" onMouseEnter={this.loadRegions}>
-                                <this.renderifTrue></this.renderifTrue>
+                            <datalist id="reigonList" onLoad={this.loadRegions}>
+                                {/* {this.state.ReigonsArr.map((item, index) =>
+                                    <option key={index} value={item} />
 
+                                )} */}
                                
                             </datalist>
 
@@ -120,18 +122,18 @@ export default class LocationForm extends React.Component {
         );
     }
 
-    renderifTrue(){
-        this.loadRegions;
-        if(this.state.ReigonsArr){
-            return (
-                <div>  {this.state.ReigonsArr.map((item, index) =>
-                    <option key={index} value={item} />
+    // renderifTrue(){
+    //     this.loadRegions;
+    //     if(this.state.ReigonsArr){
+    //         return (
+    //             <div>  {this.state.ReigonsArr.map((item, index) =>
+    //                 <option key={index} value={item} />
 
-                )}
-                </div>);
+    //             )}
+    //             </div>);
 
-        }
-    }
+    //     }
+    // }
 
     onSiteChange(event) {
         this.setState({ siteName: event.target.value });
